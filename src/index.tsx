@@ -1,11 +1,16 @@
-import ReactDOM from 'react-dom';
+import * as ReactDOM from 'react-dom/client';
+import TodoTemplate from './state/TodoTemplate';
+
+const container = document.getElementById("root");
+
+const root = ReactDOM.createRoot(container!);
 
 const App = () => {
     return (
         <div>
-            <h1>Wutchya can is now started!</h1>
+            <TodoTemplate />
         </div>
     );
 };
 
-ReactDOM.render(<App />, document.querySelector('#root'));
+root.render(<App />);
