@@ -1,5 +1,5 @@
 import * as ReactDOM from 'react-dom/client';
-import CardTemplate from './state/CardTemplate';
+import CardTemplate from './components/CardTemplate';
 
 const container = document.getElementById("root");
 
