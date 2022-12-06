@@ -1,16 +1,16 @@
-import * as ReactDOM from 'react-dom/client';
-import CardTemplate from './components/CardTemplate';
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import { Provider } from 'react-redux';
+import { store } from './app/store';
+import App from './App';
 
-const container = document.getElementById("root");
+const container = document.getElementById('root')!;
+const root = createRoot(container);
 
-const root = ReactDOM.createRoot(container!);
-
-const App = () => {
-    return (
-        <div>
-            <CardTemplate />
-        </div>
-    );
-};
-
-root.render(<App />);
+root.render(
+  <React.StrictMode>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </React.StrictMode>
+);
