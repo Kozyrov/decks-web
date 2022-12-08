@@ -1,11 +1,16 @@
-import React from 'react';
-import CardTemplate from './components/CardTemplate';
+import InlineCardTemplate from './components/InlineCard/InlineCardTemplate';
+import Deck from './components/Deck/Deck';
+import { useState } from 'react';
+
 
 function App() {
+  const [cards, setCards] = useState<string[]>([]);
+
   return (
     <div className="App">
       <header className="App-header">
-        <CardTemplate />
+        <Deck deck={cards}/>
+        <InlineCardTemplate addCardToDeck={(title) => setCards([...cards, title])}/>
       </header>
     </div>
   );
