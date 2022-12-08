@@ -1,14 +1,16 @@
-type DeckTypes = {
-    deck: string[];
-}
+import { useState } from 'react';
+import InlineCardTemplate from '../InlineCard/InlineCardTemplate';
 
-const Deck = ({deck}: DeckTypes) => {
+const Deck = () => {
+    const [cards, setCards] = useState<string[]>([]);
+
     return (
         <div>
             <div>Card List</div>
-            {deck.map((card, i) => (
+            {cards.map((card, i) => (
                 <div key={`card_${i}`}>{card}</div>
             ))}
+            <InlineCardTemplate addCardToDeck={(title) => setCards([...cards, title])}/>
         </div>
     )
 }
