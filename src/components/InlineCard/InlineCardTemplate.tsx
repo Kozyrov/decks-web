@@ -21,8 +21,9 @@ const InlineCardTemplate = ({addCardToDeck}: CardTemplateTypes) => {
             {
                 visible ? 
                 <>
-                    <input autoFocus ref={titleRef} value={title} onChange={(e) => setTitle(e.target.value)}/>
+                    <input autoFocus placeholder='Card title' ref={titleRef} value={title} onChange={(e) => setTitle(e.target.value)}/>
                     <button onClick={addCard}>Add Card</button>
+                    <button onClick={() => setVisible(false)}>Cancel</button>
                 </> :
                 <button onClick={() => setVisible(true)}>+ card</button>
             }
