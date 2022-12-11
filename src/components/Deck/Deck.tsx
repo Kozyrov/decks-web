@@ -9,10 +9,10 @@ const Deck = () => {
         <div>
             <div>Card List</div>
             {cards.map((card, i) => (
-                <>
-                  <div key={`card_${i}`}>{card.title}</div>
-                  <div key={`desc_${i}`}>{card.description}</div>
-                </>
+                <div key={card.id}>
+                  <div>{card.title}</div>
+                  <div>{card.description}</div>
+                </div>
             ))}
             <InlineCardTemplate addCardToDeck={(card) => setCards([...cards, card])}/>
         </div>
