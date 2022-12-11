@@ -1,18 +1,21 @@
 import { useState, useRef } from 'react';
+import { CardType } from '../../shared/types/card.types';
 
-type CardTemplateTypes = {
-    addCardToDeck: (title: string) => void; 
+type CardTemplateType = {
+    addCardToDeck: (templateData: CardType) => void; 
 }
 
-const InlineCardTemplate = ({addCardToDeck}: CardTemplateTypes) => {
-    const [title, setTitle] = useState('');
+const InlineCardTemplate = ({addCardToDeck}: CardTemplateType) => {
     const [visible, setVisible] = useState(false);
 
     const titleRef = useRef<HTMLInputElement | null>(null);
+    const descriptionRef = useRef<HTMLTextAreaElement | null>(null);
 
     const addCard = () => {
-        setTitle('');
-        addCardToDeck(title);
+        addCardToDeck({
+            title: titleRef.current?.value || "Title missing",
+            description: descriptionRef.current?.value
+        });
         titleRef.current?.focus();
     }
 
@@ -21,7 +24,10 @@ const InlineCardTemplate = ({addCardToDeck}: CardTemplateTypes) => {
             {
                 visible ? 
                 <>
-                    <input autoFocus placeholder='Card title' ref={titleRef} value={title} onChange={(e) => setTitle(e.target.value)}/>
+                    <input autoFocus placeholder="Card title" ref={titleRef} />
+                    <div>
+                        <textarea ref={descriptionRef}/>
+                    </div>
                     <button onClick={addCard}>Add Card</button>
                     <button onClick={() => setVisible(false)}>Cancel</button>
                 </> :
