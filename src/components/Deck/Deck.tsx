@@ -1,18 +1,17 @@
 import { useState } from 'react';
 import { CardType } from '../../shared/types/card.types';
-import InlineCardTemplate from '../Card/InlineTemplate';
+import InlineCard from '../Card/InlineCard';
+import InlineCardTemplate from '../Shared/InlineTemplate';
+import styles from './deck.module.scss';
 
 const Deck = () => {
     const [cards, setCards] = useState<CardType[]>([]);
 
     return (
-        <div>
-            <div>Card List</div>
-            {cards.map((card, i) => (
-                <div key={card.id}>
-                  <div>{card.title}</div>
-                  <div>{card.description}</div>
-                </div>
+        <div className={styles.deck}>
+            <span>Deck {cards.length}</span>
+            {cards.map((card) => (
+                <InlineCard card={card} key={card.id} />
             ))}
             <InlineCardTemplate addCardToDeck={(card) => setCards([...cards, card])}/>
         </div>

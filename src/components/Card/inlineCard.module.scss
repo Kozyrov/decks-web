@@ -1,0 +1,25 @@
+.inline_card {
+    border: 1px solid black;
+    margin: 1em 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: .4em .75em;
+
+    .inline_content {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+    }
+            
+    .inline_desc {
+        -webkit-line-clamp: 1;
+    }
+
+    .inline_title {
+        font-weight: 600;
+        word-wrap: break-word;
+        -webkit-line-clamp: 3;
+    }
+}

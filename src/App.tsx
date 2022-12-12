@@ -1,4 +1,5 @@
 import Deck from './components/Deck/Deck';
+import './App.module.scss';
 
 function App() {
   return (
