@@ -1,11 +1,11 @@
-import React from 'react';
-import CardTemplate from './components/CardTemplate';
+import Deck from './components/Deck/Deck';
+import './App.module.scss';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <CardTemplate />
+        <Deck />
       </header>
     </div>
   );
