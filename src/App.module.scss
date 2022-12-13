@@ -11,3 +11,7 @@ textarea, input {
 *, *:before, *:after {
     box-sizing: inherit;
 }
+
+.App_body {
+    display: flex;
+}
