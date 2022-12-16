@@ -8,8 +8,8 @@ type CardTemplateType = {
 }
 
 const InlineCardTemplate = ({addCardToDeck}: CardTemplateType) => {
-    const [visible, setVisible] = useState(false);
-    const [validTitle, setValidTitle] = useState(false);
+    const [visible, setVisible] = useState<boolean>(false);
+    const [validTitle, setValidTitle] = useState<boolean>(false);
 
     const titleRef = useRef<HTMLInputElement | null>(null);
     const descRef = useRef<HTMLDivElement | null>(null);

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { CardType } from '../../shared/types/card.types';
-import InlineCard from '../Card/InlineCard';
+import InlineCard from '../Card/InlineCard/InlineCard';
 import InlineCardTemplate from '../Shared/InlineTemplate';
 import styles from './deck.module.scss';
 
