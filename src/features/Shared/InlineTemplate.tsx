@@ -17,7 +17,7 @@ const InlineCardTemplate = ({addCardToDeck}: CardTemplateType) => {
     const addCard = () => {
         if (titleRef.current?.textContent) {
             addCardToDeck({
-                id: uuidv4(),
+                cardId: uuidv4(),
                 title: titleRef.current?.textContent || "Title missing",
                 description: descRef.current?.textContent
             });

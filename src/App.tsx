@@ -1,5 +1,5 @@
-import Deck from './components/Deck/Deck';
-import BladeMenuContainer from './components/BladeMenu/BladeMenuContainer';
+import Deck from './features/Deck/Deck';
+import BladeMenuContainer from './features/BladeMenu/BladeMenuContainer';
 import styles from './App.module.scss';
 
 function App() {
