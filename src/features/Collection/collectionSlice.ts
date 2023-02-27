@@ -29,7 +29,11 @@ const collectionSlice = createSlice({
     name: "collection",
     initialState,
     reducers: {
-        removeCard(state: CollectionState, action: PayloadAction<CardDto>) {
+        addNewCardToDeck(state: CollectionState, action: PayloadAction<CardDto>) {
+            const {cardId, deckId} = action.payload;
+            
+        },
+        removeCardFromDeck(state: CollectionState, action: PayloadAction<CardDto>) {
             const {cardId, deckId} = action.payload;
             const target = state.entities.collection.cards[cardId];
         
