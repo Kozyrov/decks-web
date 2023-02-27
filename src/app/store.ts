@@ -1,7 +1,9 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
+import collectionSlice from '../features/Collection/collectionSlice';
 
 export const store = configureStore({
   reducer: {
+    collection: collectionSlice
   },
 });
 
