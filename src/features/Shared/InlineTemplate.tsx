@@ -4,10 +4,10 @@ import { v4 as uuidv4 } from 'uuid';
 import styles from './inlineTemplate.module.scss';
 
 type CardTemplateType = {
-    addCardToDeck: (templateData: CardType) => void; 
+    addNewCardToDeck: (templateData: CardType) => void; 
 }
 
-const InlineCardTemplate = ({addCardToDeck}: CardTemplateType) => {
+const InlineCardTemplate = ({addNewCardToDeck}: CardTemplateType) => {
     const [visible, setVisible] = useState<boolean>(false);
     const [validTitle, setValidTitle] = useState<boolean>(false);
 
@@ -16,7 +16,7 @@ const InlineCardTemplate = ({addCardToDeck}: CardTemplateType) => {
 
     const addCard = () => {
         if (titleRef.current?.textContent) {
-            addCardToDeck({
+            addNewCardToDeck({
                 cardId: uuidv4(),
                 title: titleRef.current?.textContent || "Title missing",
                 description: descRef.current?.textContent

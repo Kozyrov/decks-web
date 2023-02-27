@@ -6,6 +6,7 @@ import styles from './deck.module.scss';
 
 const Deck = () => {
     const [cards, setCards] = useState<CardType[]>([]);
+    
     const deckId = "101";
 
     return (
