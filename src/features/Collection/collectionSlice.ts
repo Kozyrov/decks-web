@@ -1,14 +1,19 @@
-import { createSlice,  PayloadAction } from '@reduxjs/toolkit';
+import { createSelector, createSlice,  PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from '../../app/store';
 import { StaticDecks } from '../../shared/constants/deck.constants';
 import { AsyncStatus } from '../../shared/constants/state.constants';
-import { CardDictionary, CardDto } from '../../shared/types/card.types';
+import { Entity, EntityDictionary, EntityDto } from '../../shared/types/entity.types';
 
-interface CollectionState {
+export interface CollectionState {
     status: AsyncStatus,
     entities: {
-        collection: {
+        cards: {
             ids: string[],
-            cards: CardDictionary
+            byId: EntityDictionary,
+        },
+        decks: {
+            ids: string[],
+            byId: EntityDictionary,
         }
     },
     error: boolean 
@@ -17,9 +22,13 @@ interface CollectionState {
 const initialState = {
     status: AsyncStatus.idle,
     entities: {
-        collection: {
+        cards: {
             ids: [],
-            cards: {}
+            byId: {}
+        },
+        decks: {
+            ids: [],
+            byId: {}
         }
     },
     error: false
@@ -29,19 +38,29 @@ const collectionSlice = createSlice({
     name: "collection",
     initialState,
     reducers: {
-        addNewCardToDeck(state: CollectionState, action: PayloadAction<CardDto>) {
-            const {cardId, deckId} = action.payload;
-            
+        addNewCardToDeck(state: CollectionState, action: PayloadAction<Entity>) {
+            const newCard = action.payload;
+            const target = state.entities.cards;
+
+            target.byId[newCard.uniqueId] = newCard;
+            target.ids = [...target.ids, newCard.uniqueId];           
         },
-        removeCardFromDeck(state: CollectionState, action: PayloadAction<CardDto>) {
-            const {cardId, deckId} = action.payload;
-            const target = state.entities.collection.cards[cardId];
+        removeCardFromDeck(state: CollectionState, action: PayloadAction<EntityDto>) {
+            const {uniqueId, groupId} = action.payload;
+            const target = state.entities.cards.byId[uniqueId];
         
-            target.deckIds = target.deckIds.filter(cardId => cardId !== deckId);
-            if (!target.deckIds.includes(StaticDecks.unsorted)) target.deckIds = [...target.deckIds, StaticDecks.unsorted];
+            target.groupIds = target.groupIds.filter(cardId => cardId !== groupId);
+            if (!target.groupIds.includes(StaticDecks.unsorted)) target.groupIds = [...target.groupIds, StaticDecks.unsorted];
         }
     },
 });
 
-export const { removeCard } = collectionSlice.actions;
+export const selectCardsByDeckId = createSelector([
+    (state: CollectionState) => state,
+    (state: CollectionState, deckId: string) => deckId
+],
+    (collection, deckId): Entity[] => collection.entities.decks.byId[deckId].groupIds.map(cardId => collection.entities.cards.byId[cardId])
+);
+
+export const { addNewCardToDeck, removeCardFromDeck } = collectionSlice.actions;
 export default collectionSlice.reducer;

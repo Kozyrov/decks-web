@@ -1,15 +1,15 @@
 import { useState, useRef } from 'react';
-import { Entity } from '../../shared/types/entity.types';
+import { Entity, EntitySource } from '../../shared/types/entity.types';
 import { v4 as uuidv4 } from 'uuid';
 import styles from './inlineTemplate.module.scss';
 
-type InlineTemplateType = {
+interface InlineTemplateProps {
     entityName: string;
     groupId: string;
     addNewEntityToGroup: (templateData: Entity) => void;
 }
 
-const InlineTemplate = ({addNewEntityToGroup, groupId, entityName}: InlineTemplateType) => {
+const InlineTemplate = ({addNewEntityToGroup, groupId, entityName}: InlineTemplateProps) => {
     const [visible, setVisible] = useState<boolean>(false);
     const [validTitle, setValidTitle] = useState<boolean>(false);
 
@@ -18,7 +18,7 @@ const InlineTemplate = ({addNewEntityToGroup, groupId, entityName}: InlineTempla
 
     const addEntity = () => {
         if (titleRef.current?.textContent) {
-            addNewEntityToGroup(new Entity(uuidv4(), [groupId], titleRef.current?.textContent, descRef.current?.textContent));
+            addNewEntityToGroup(new EntitySource(uuidv4(), [groupId], titleRef.current?.textContent, descRef.current?.textContent));
             titleRef.current.textContent = "";
             if(descRef.current?.textContent) descRef.current.textContent = "";  
         };

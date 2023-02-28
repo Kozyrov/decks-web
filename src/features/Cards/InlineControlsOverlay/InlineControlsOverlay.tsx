@@ -1,16 +1,20 @@
 import ArchiveIcon from '@mui/icons-material/Archive';
-import { removeCard } from '../../Collection/collectionSlice';
+import { useDispatch } from 'react-redux';
+import { removeCardFromDeck } from '../../Collection/collectionSlice';
 import styles from './inlineControlsOverlay.module.scss';
 
-type InlineControlsOverlayType = {
+type InlineControlsOverlayProps = {
     cardId: string;
     deckId: string;
 }
 
-const InlineControlsOverlay = ({cardId, deckId}: InlineControlsOverlayType) => {
+
+const InlineControlsOverlay = ({cardId, deckId}: InlineControlsOverlayProps) => {
+    const dispatch = useDispatch();
+
     return (
         <div className={`${styles.inline_controls_overlay}`} id={`inline-control-${cardId}`}>
-            <ArchiveIcon onClick={() => removeCard({ cardId, deckId })} />
+            <ArchiveIcon onClick={() => dispatch(removeCardFromDeck({ uniqueId: cardId, groupId: deckId }))} />
         </div>
     )
 }

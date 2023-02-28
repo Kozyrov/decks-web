@@ -1,21 +1,24 @@
-import { useState } from 'react';
-import { CardType } from '../../shared/types/card.types';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../app/store';
+import { Entity } from '../../shared/types/entity.types';
 import InlineCard from '../Cards/InlineCard/InlineCard';
-import InlineCardTemplate from '../Shared/InlineTemplate';
+import { addNewCardToDeck, selectCardsByDeckId } from '../Collection/collectionSlice';
+import InlineTemplate from '../Shared/InlineTemplate';
 import styles from './deck.module.scss';
 
 const Deck = () => {
-    const [cards, setCards] = useState<CardType[]>([]);
-    
     const deckId = "101";
+
+    const dispatch = useDispatch();
+    const cards: Entity[] = useSelector((state: RootState) => selectCardsByDeckId(state.collection, deckId));
 
     return (
         <div className={styles.deck}>
             <span>Deck {cards.length}</span>
             {cards.map((card) => (
-                <InlineCard card={card} deckId={deckId} key={`${deckId}_${card.cardId}`} />
+                <InlineCard card={card} deckId={deckId} key={`${deckId}_${card.uniqueId}`} />
             ))}
-            <InlineCardTemplate addCardToDeck={(card) => setCards([...cards, card])}/>
+            <InlineTemplate groupId={deckId} entityName={"card"} addNewEntityToGroup={(card: Entity) => dispatch(addNewCardToDeck(card))}/>
         </div>
     )
 }
