@@ -1,2 +1,2 @@
-"If you can't do what you need to, do wutchyacan."
+"Digitize, organize, and deal your cards right from a Deck."
 current version: v0.1.0
